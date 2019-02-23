@@ -38,10 +38,10 @@
                                         <p style="color:red;">＊</p>
                                     </td>
                                     <!--<td>
-                                        <p>例：ＴＩＳ　太郎</p>
-                                        <div class="field" th:classappend="${errors.hasError('kanjiName')} ? 'error'">
-                                            <input type="text" name="kanjiName" th:value="${form.kanjiName}"/>
-                                            <p th:if="${errors.hasError('kanjiName')}"
+                                        <p>例：ＴＩＳ　太郎</p>-->
+                                        <!--<div class="field" th:classappend="${errors.hasError('kanjiName')} ? 'error'">
+                                            <input type="text" name="kanjiName" th:text="${form.kanjiName}"/>
+                                            <!--<p th:if="${errors.hasError('kanjiName')}"
                                                th:text="${errors.getMessage('kanjiName')}" class="error-message">
                                             </p>
                                         </div>
@@ -352,17 +352,21 @@
                                     <td>
                                         <label>業種</label>
                                     </td>
-                                    <!--<td>
+                                    <td>
                                         <div th:each="item : ${industryTypes}" class="field"
                                              th:classappend="${errors.hasError('industryType')} ? 'error'">
                                             <input type="radio" name="industryType" th:value="${item.code}"
                                                    th:text="${item.label}" th:field="*{industryType}"
                                                    th:checked="${form.industryType}==${item.code}"/>
                                         </div>
-                                        <p th:if="${errors.hasError('industryType')}"
+                                        <!--<p th:if="${errors.hasError('industryType')}"
                                            th:text="${errors.getMessage('industryType')}" class="error-message">
-                                        </p>
-                                    </td>-->
+                                        </p>-->
+                                    </td>
+                                    <!--<tb>
+                                        <p th:value="${form.industryTypes}"></p>
+
+                                    </tb>-->
                                 </tr>
                                 </tbody>
                             </table>

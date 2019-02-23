@@ -266,6 +266,8 @@ public class OrderAction {
 
 
     @InjectForm(form = JobForm.class)
+    //@InjectForm(form = UserForm.class)
+    //@InjectForm(form = UserForm2.class)
     @OnError(type = ApplicationException.class, path = "forward://inputJobForError")
     @OnDoubleSubmission(path = "doubleSubmissionError.html")
     public HttpResponse confirmation(HttpRequest req, ExecutionContext ctx) {
@@ -273,6 +275,9 @@ public class OrderAction {
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
 
         BeanUtil.copy(form, insOrder);
+        ctx.setRequestScopedVar("kanjiName", insOrder.getKanjiName());
+        ctx.setRequestScopedVar("industryTypes", IndustryType.values());
+
         return new HttpResponse("confirmation.html");
     }
 
