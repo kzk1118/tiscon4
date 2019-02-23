@@ -29,7 +29,7 @@
                 <div class="user-block">
                     <h1 class="ui aligned header teal">お申込み情報</h1>
 
-                    <form class="ui form" method="post" action="/action/order/inputJob">
+                    <form class="ui form" method="post" action="/action/order/inputUser2">
 
                         <div class="ui horizontal divider">ご本人について</div>
 
@@ -193,118 +193,20 @@
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <label>配偶者有無</label>
-                                    <p style="color:red;">＊</p>
-                                </td>
-                                <td>
-                                    <div th:each="item : ${marriedTypes}" class="field"
-                                         th:classappend="${errors.hasError('married')} ? 'error'">
-                                        <input type="radio" name="married" th:value="${item.code}"
-                                               th:text="${item.label}" th:field="*{married}"
-                                               th:checked="${form.married}==${item.code}"/>
-                                    </div>
-                                    <p th:if="${errors.hasError('married')}" th:text="${errors.getMessage('married')}"
-                                       class="error-message">
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>昨年の所得（半角）</label>
-                                    <p style="color:red;">＊</p>
-                                </td>
-                                <td>
-                                    <div class="field" th:classappend="${errors.hasError('income')} ? 'error'">
-                                        <input type="text" class="number" name="income" th:value="${form.income}"/><span
-                                            class="unit">万円</span>
-                                        <p th:if="${errors.hasError('income')}" th:text="${errors.getMessage('income')}"
-                                           class="error-message">
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>ご職業</label>
-                                    <p style="color:red;">＊</p></td>
-                                <td>
-                                    <div th:each="item : ${jobTypes}" class="field"
-                                         th:classappend="${errors.hasError('job')} ? 'error'">
-                                        <input type="radio" name="job" th:value="${item.code}" th:text="${item.label}"
-                                               th:field="*{job}" th:checked="${form.job}==${item.code}"/>
-                                    </div>
-                                    <p th:if="${errors.hasError('job')}" th:text="${errors.getMessage('job')}"
-                                       class="error-message">
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>「その他 (有職）」を選んだ方は内容をご記入下さい（全角）</label>
-                                </td>
-                                <td>
-                                    <div class="field"
-                                         th:classappend="|${errors.hasError('otherJob')?'error': ''} ${errors.hasError('valueOtherJob')?'error': ''}|">
-                                        <input type="text" name="otherJob" th:value="${form.otherJob}"/>
-                                        <p th:if="${errors.hasError('otherJob')}"
-                                           th:text="${errors.getMessage('otherJob')}" class="error-message">
-                                        </p>
-                                        <p th:if="${errors.hasError('valueOtherJob')}"
-                                           th:text="${errors.getMessage('valueOtherJob')}" class="error-message">
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>過去5年以内に、病気やケガで7日間以上にわたって医師の診察・検査・治療・投薬をうけたことがありますか</label>
-                                    <p style="color:red;">＊</p>
-                                </td>
-                                <td>
-                                    <div th:each="item : ${treatedTypes}" class="field"
-                                         th:classappend="${errors.hasError('treatedTypes')} ? 'error'">
-                                        <input type="radio" name="treated" th:value="${item.code}"
-                                               th:text="${item.label}" th:field="*{treated}"
-                                               th:checked="${form.treated}==${item.code}"/>
-                                    </div>
-                                    <p th:if="${errors.hasError('treated')}" th:text="${errors.getMessage('treated')}"
-                                       class="error-message">
-                                    </p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label>「はい」 を選んだ方は内容をご記入下さい（全角）</label>
-                                </td>
-                                <td>
-                                    <div class="field"
-                                         th:classappend="|${errors.hasError('medicalHistory')?'error': ''} ${errors.hasError('valueMedicalHistory')?'error': ''}|">
-                                        <input type="text" name="medicalHistory" th:value="${form.medicalHistory}"/>
-                                        <p th:if="${errors.hasError('medicalHistory')}"
-                                           th:text="${errors.getMessage('medicalHistory')}" class="error-message">
-                                        </p>
-                                        <p th:if="${errors.hasError('valueMedicalHistory')}"
-                                           th:text="${errors.getMessage('valueMedicalHistory')}" class="error-message">
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
                             </tbody>
                         </table>
 
-                        <div class="ui column grid">
-                            <div class="eight wide column left aligned">
-                                <!--/*戻る場合、formの送り先を強制的に書き換える*/-->
-                                <button class="ui button angle left icon"
-                                        onclick="form.action='/action/order/backToAccept';return true">戻る
-                                </button>
+                            <div class="ui column grid">
+                                <div class="eight wide column left aligned">
+                                    <!--/*戻る場合、formの送り先を強制的に書き換える*/-->
+                                    <button class="ui button angle left icon"
+                                            onclick="form.action='/action/order/backToAccept';return true">戻る
+                                    </button>
+                                </div>
+                                <div class="eight wide column right aligned">
+                                    <button class="ui teal button angle right icon">次へ（お勤め先情報の入力）</button>
+                                </div>
                             </div>
-                            <div class="eight wide column right aligned">
-                                <button class="ui teal button angle right icon">次へ（お勤め先情報の入力）</button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

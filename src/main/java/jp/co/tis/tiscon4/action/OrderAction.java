@@ -7,10 +7,7 @@ import jp.co.tis.tiscon4.common.code.MarriedType;
 import jp.co.tis.tiscon4.common.code.TreatedType;
 import jp.co.tis.tiscon4.dto.ZipcodeDto;
 import jp.co.tis.tiscon4.entity.InsuranceOrder;
-import jp.co.tis.tiscon4.form.AcceptForm;
-import jp.co.tis.tiscon4.form.IndexForm;
-import jp.co.tis.tiscon4.form.JobForm;
-import jp.co.tis.tiscon4.form.UserForm;
+import jp.co.tis.tiscon4.form.*;
 import nablarch.common.dao.UniversalDao;
 import nablarch.common.web.interceptor.InjectForm;
 import nablarch.common.web.session.SessionUtil;
@@ -64,11 +61,35 @@ public class OrderAction {
     public HttpResponse inputUser(HttpRequest req, ExecutionContext ctx) {
         ctx.setRequestScopedVar("form", new UserForm());
         ctx.setRequestScopedVar("genderTypes", GenderType.values());
+      /*  ctx.setRequestScopedVar("marriedTypes", MarriedType.values());
+        ctx.setRequestScopedVar("jobTypes", JobType.values());
+        ctx.setRequestScopedVar("treatedTypes", TreatedType.values()); */
+
+        return new HttpResponse("user.html");
+    }
+
+    /**
+     * 本人登録画面２を表示する。
+     *
+     * @param req リクエストコンテキスト
+     * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
+     * @return HTTPレスポンス
+     */
+    @InjectForm(form = UserForm.class)
+    @OnError(type = ApplicationException.class, path = "forward://inputUserForError")
+    public HttpResponse inputUser2(HttpRequest req, ExecutionContext ctx) {
+        UserForm form = ctx.getRequestScopedVar("form");
+        InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
+
+        ctx.setRequestScopedVar("form", new UserForm2());
+      //  ctx.setRequestScopedVar("genderTypes", GenderType.values());
         ctx.setRequestScopedVar("marriedTypes", MarriedType.values());
         ctx.setRequestScopedVar("jobTypes", JobType.values());
         ctx.setRequestScopedVar("treatedTypes", TreatedType.values());
 
-        return new HttpResponse("user.html");
+        BeanUtil.copy(form, insOrder);
+
+        return new HttpResponse("user2.html");
     }
 
     /**
@@ -78,15 +99,15 @@ public class OrderAction {
      * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
      * @return HTTPレスポンス
      */
-    @InjectForm(form = UserForm.class)
-    @OnError(type = ApplicationException.class, path = "forward://inputUserForError")
+    @InjectForm(form = UserForm2.class)
+    @OnError(type = ApplicationException.class, path = "forward://inputUserForError2")
     @UseToken
     public HttpResponse inputJob(HttpRequest req, ExecutionContext ctx) {
-        UserForm form = ctx.getRequestScopedVar("form");
+        UserForm2 form = ctx.getRequestScopedVar("form");
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
 
         // treatLadyは女性しか加入できないため、性別選択チェックを行う。
-        if (insOrder.getInsuranceType().equals("treatLady") && form.getGender().equals("male")) {
+        if (insOrder.getInsuranceType().equals("treatLady") && insOrder.getGender().equals("male")) {
             Message message = ValidationUtil.createMessageForProperty("gender", "tiscon4.order.inputUser.error.gender");
             throw new ApplicationException(message);
         }
@@ -110,11 +131,27 @@ public class OrderAction {
      */
     public HttpResponse inputUserForError(HttpRequest req, ExecutionContext ctx) {
         ctx.setRequestScopedVar("genderTypes", GenderType.values());
+       /* ctx.setRequestScopedVar("marriedTypes", MarriedType.values());
+        ctx.setRequestScopedVar("jobTypes", JobType.values());
+        ctx.setRequestScopedVar("treatedTypes", TreatedType.values());*/
+
+        return new HttpResponse("user.html");
+    }
+
+    /**
+     * 本人登録画面2に入力エラーがあった時に再表示する。
+     *
+     * @param req リクエストコンテキスト
+     * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
+     * @return HTTPレスポンス
+     */
+    public HttpResponse inputUserForError2(HttpRequest req, ExecutionContext ctx) {
+        //ctx.setRequestScopedVar("genderTypes", GenderType.values());
         ctx.setRequestScopedVar("marriedTypes", MarriedType.values());
         ctx.setRequestScopedVar("jobTypes", JobType.values());
         ctx.setRequestScopedVar("treatedTypes", TreatedType.values());
 
-        return new HttpResponse("user.html");
+        return new HttpResponse("user2.html");
     }
 
     /**
@@ -199,11 +236,32 @@ public class OrderAction {
 
         ctx.setRequestScopedVar("form", form);
         ctx.setRequestScopedVar("genderTypes", GenderType.values());
+        /*ctx.setRequestScopedVar("marriedTypes", MarriedType.values());
+        ctx.setRequestScopedVar("jobTypes", JobType.values());
+        ctx.setRequestScopedVar("treatedTypes", TreatedType.values());*/
+
+        return new HttpResponse("user.html");
+    }
+
+    /**
+     * 本人登録画面2に戻る。
+     *
+     * @param req リクエストコンテキスト
+     * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
+     * @return HTTPレスポンス
+     */
+    public HttpResponse backToUser2(HttpRequest req, ExecutionContext ctx) {
+        InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
+        UserForm2 form = new UserForm2();
+        BeanUtil.copy(insOrder, form);
+
+        ctx.setRequestScopedVar("form", form);
+       // ctx.setRequestScopedVar("genderTypes", GenderType.values());
         ctx.setRequestScopedVar("marriedTypes", MarriedType.values());
         ctx.setRequestScopedVar("jobTypes", JobType.values());
         ctx.setRequestScopedVar("treatedTypes", TreatedType.values());
 
-        return new HttpResponse("user.html");
+        return new HttpResponse("user2.html");
     }
 
 
