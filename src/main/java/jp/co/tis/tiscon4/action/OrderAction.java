@@ -44,7 +44,6 @@ public class OrderAction {
     public HttpResponse accept(HttpRequest req, ExecutionContext ctx) {
         IndexForm indexForm = ctx.getRequestScopedVar("form");
         InsuranceOrder insOrder = BeanUtil.createAndCopy(InsuranceOrder.class, indexForm);
-
         SessionUtil.delete(ctx, "insOrder");
         SessionUtil.put(ctx, "insOrder", insOrder);
 
@@ -125,18 +124,20 @@ public class OrderAction {
      * @param ctx HTTPリクエストの処理に関連するサーバ側の情報
      * @return HTTPレスポンス
      */
-    @InjectForm(form = JobForm.class)
+    /*@InjectForm(form = JobForm.class)
     @OnError(type = ApplicationException.class, path = "forward://inputJobForError")
-    @OnDoubleSubmission(path = "doubleSubmissionError.html")
+    @OnDoubleSubmission(path = "doubleSubmissionError.html")*/
     public HttpResponse create(HttpRequest req, ExecutionContext ctx) {
-        JobForm form = ctx.getRequestScopedVar("form");
+        /*JobForm form = ctx.getRequestScopedVar("form");
         InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
 
         BeanUtil.copy(form, insOrder);
+        */
+        InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
 
         UniversalDao.insert(insOrder);
 
-        return new HttpResponse("redirect://completed");
+        return new HttpResponse("completed.html");
     }
 
     /**
@@ -203,6 +204,18 @@ public class OrderAction {
         ctx.setRequestScopedVar("treatedTypes", TreatedType.values());
 
         return new HttpResponse("user.html");
+    }
+
+
+    @InjectForm(form = JobForm.class)
+    @OnError(type = ApplicationException.class, path = "forward://inputJobForError")
+    @OnDoubleSubmission(path = "doubleSubmissionError.html")
+    public HttpResponse confirmation(HttpRequest req, ExecutionContext ctx) {
+        JobForm form = ctx.getRequestScopedVar("form");
+        InsuranceOrder insOrder = SessionUtil.get(ctx, "insOrder");
+
+        BeanUtil.copy(form, insOrder);
+        return new HttpResponse("confirmation.html");
     }
 
 }

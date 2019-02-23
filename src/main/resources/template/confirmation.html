@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ご確認画面</title>
+
+    <link rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Exo:900}"/>
+    <link rel="stylesheet"
+          th:href="@{https://cdn.jsdelivr.net/semantic-ui/2.2.6/semantic.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+</head>
+<body>
+<nav th:insert="header.html :: header"></nav>
+
+<div class="full height image">
+    <div class="ui main container">
+        <div class="ui information container">
+            <div class="ui middle center aligned grid">
+                <form class="ui form" method="post" action="/action/order/create">
+                    <div class="center column">
+                        <div class="ui segment">
+                            <h2 class="ui aligned header teal">ご確認画面</h2>
+                            <div class="ui comments">
+                                ご登録内容の確認です。<br>
+                                内容を確認し、誤入力がない場合は下記の「申し込む」ボタンを押してください。
+                            </div>
+                            <p th:text="${form.kanjiName}"><p></p>
+
+
+                            <button class="ui teal button">申し込み</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--<p th:text="insorder"></p>-->
+<p th:text="${form.kanjiName}"><p></p>
+</body>
+</html>
