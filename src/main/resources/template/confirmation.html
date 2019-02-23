@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ご確認画面</title>
+    <title>ご確認画面　(5/6)</title>
 
     <link rel="stylesheet" th:href="@{http://fonts.googleapis.com/css?family=Exo:900}"/>
     <link rel="stylesheet"
@@ -19,15 +19,357 @@
                 <form class="ui form" method="post" action="/action/order/create">
                     <div class="center column">
                         <div class="ui segment">
-                            <h2 class="ui aligned header teal">ご確認画面</h2>
+                            <h2 class="ui aligned header teal">ご確認画面　(5/6)</h2>
                             <div class="ui comments">
                                 ご登録内容の確認です。<br>
                                 内容を確認し、誤入力がない場合は下記の「申し込む」ボタンを押してください。
                             </div>
-                            <p th:text="${form.kanjiName}"><p></p>
+                            <hr>
+                            <!--<p th:text="${form.kanjiName}"><p></p>-->
+                            <p>申し訳ございません。<br>
+                            ただいまメンテナンスを行なっておりますので、<br>
+                            ご入力していただいた情報を表示することができません。<br></p>
+
+                            <table class="ui celled table">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <label>お名前（漢字）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：ＴＩＳ　太郎</p>
+                                        <div class="field" th:classappend="${errors.hasError('kanjiName')} ? 'error'">
+                                            <input type="text" name="kanjiName" th:value="${form.kanjiName}"/>
+                                            <p th:if="${errors.hasError('kanjiName')}"
+                                               th:text="${errors.getMessage('kanjiName')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td style="white-space: nowrap;">
+                                        <label>お名前（カタカナ）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：ティーアイエス　タロウ</p>
+                                        <div class="field" th:classappend="${errors.hasError('kanaName')} ? 'error'">
+                                            <input type="text" name="kanaName" th:value="${form.kanaName}"/>
+                                            <p th:if="${errors.hasError('kanaName')}"
+                                               th:text="${errors.getMessage('kanaName')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>お名前（ローマ字）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：TIS TAROU</p>
+                                        <div class="field" th:classappend="${errors.hasError('alphabetName')} ? 'error'">
+                                            <input type="text" name="alphabetName" th:value="${form.alphabetName}"/>
+                                            <p th:if="${errors.hasError('alphabetName')}"
+                                               th:text="${errors.getMessage('alphabetName')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>性別</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <div th:each="item : ${genderTypes}" class="field"
+                                             th:classappend="${errors.hasError('gender')} ? 'error'">
+                                            <input type="radio" name="gender" th:value="${item.code}"
+                                                   th:text="${item.label}" th:field="*{gender}"
+                                                   th:checked="${form.gender}==${item.code}"/>
+
+                                        </div>
+                                        <p th:if="${errors.hasError('gender')}" th:text="${errors.getMessage('gender')}"
+                                           class="error-message">
+                                        </p>
+                                    </td>-->
+
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>生年月日（半角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：1990/01/01</p>
+                                        <div class="field" th:classappend="${errors.hasError('dateOfBirth')} ? 'error'">
+                                            <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}"/>
+                                            <p th:if="${errors.hasError('dateOfBirth')}"
+                                               th:text="${errors.getMessage('dateOfBirth')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>郵便番号（半角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：123-4567</p>
+                                        <div class="field" th:classappend="${errors.hasError('zipCode')} ? 'error'">
+                                            <input type="text" class="zipcode" name="zipCode" th:value="${form.zipCode}"/>
+                                            <p th:if="${errors.hasError('zipCode')}"
+                                               th:text="${errors.getMessage('zipCode')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>ご住所（全角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：東京都新宿区西新宿８－１７－１</p>
+                                        <div class="field" th:classappend="${errors.hasError('address')} ? 'error'">
+                                            <input type="text" name="address" th:value="${form.address}"/>
+                                            <p th:if="${errors.hasError('address')}"
+                                               th:text="${errors.getMessage('address')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>自宅電話番号（半角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：00-1111-2222</p>
+                                        <div class="field" th:classappend="${errors.hasError('homePhoneNumber')} ? 'error'">
+                                            <input type="text" name="homePhoneNumber" th:value="${form.homePhoneNumber}"/>
+                                            <p th:if="${errors.hasError('homePhoneNumber')}"
+                                               th:text="${errors.getMessage('homePhoneNumber')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>携帯電話番号（半角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：080-0000-0000</p>
+                                        <div class="field"
+                                             th:classappend="${errors.hasError('mobilePhoneNumber')} ? 'error'">
+                                            <input type="text" name="mobilePhoneNumber"
+                                                   th:value="${form.mobilePhoneNumber}"/>
+                                            <p th:if="${errors.hasError('mobilePhoneNumber')}"
+                                               th:text="${errors.getMessage('mobilePhoneNumber')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>メールアドレス（半角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：tiscon@example.com</p>
+                                        <div class="field" th:classappend="${errors.hasError('emailAddress')} ? 'error'">
+                                            <input type="text" name="emailAddress" th:value="${form.emailAddress}"/>
+                                            <p th:if="${errors.hasError('emailAddress')}"
+                                               th:text="${errors.getMessage('emailAddress')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
 
 
-                            <button class="ui teal button">申し込み</button>
+                                <tr>
+                                    <td>
+                                        <label>配偶者有無</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                     <!--<td>
+                                        <div th:each="item : ${marriedTypes}" class="field"
+                                             th:classappend="${errors.hasError('married')} ? 'error'">
+                                            <input type="radio" name="married" th:value="${item.code}"
+                                                   th:text="${item.label}" th:field="*{married}"
+                                                   th:checked="${form.married}==${item.code}"/>
+                                        </div>
+                                        <p th:if="${errors.hasError('married')}" th:text="${errors.getMessage('married')}"
+                                           class="error-message">
+                                        </p>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>昨年の所得（半角）</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <div class="field" th:classappend="${errors.hasError('income')} ? 'error'">
+                                            <input type="text" class="number" name="income" th:value="${form.income}"/><span
+                                                class="unit">万円</span>
+                                            <p th:if="${errors.hasError('income')}" th:text="${errors.getMessage('income')}"
+                                               class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>ご職業</label>
+                                        <p style="color:red;">＊</p></td>
+                                    <!--<td>
+                                        <div th:each="item : ${jobTypes}" class="field"
+                                             th:classappend="${errors.hasError('job')} ? 'error'">
+                                            <input type="radio" name="job" th:value="${item.code}" th:text="${item.label}"
+                                                   th:field="*{job}" th:checked="${form.job}==${item.code}"/>
+                                        </div>
+                                        <p th:if="${errors.hasError('job')}" th:text="${errors.getMessage('job')}"
+                                           class="error-message">
+                                        </p>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>「その他 (有職）」を選んだ方は内容をご記入下さい（全角）</label>
+                                    </td>
+                                    <!--<td>
+                                        <div class="field"
+                                             th:classappend="|${errors.hasError('otherJob')?'error': ''} ${errors.hasError('valueOtherJob')?'error': ''}|">
+                                            <input type="text" name="otherJob" th:value="${form.otherJob}"/>
+                                            <p th:if="${errors.hasError('otherJob')}"
+                                               th:text="${errors.getMessage('otherJob')}" class="error-message">
+                                            </p>
+                                            <p th:if="${errors.hasError('valueOtherJob')}"
+                                               th:text="${errors.getMessage('valueOtherJob')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>過去5年以内に、病気やケガで7日間以上にわたって医師の診察・検査・治療・投薬をうけたことがありますか</label>
+                                        <p style="color:red;">＊</p>
+                                    </td>
+                                    <!--<td>
+                                        <div th:each="item : ${treatedTypes}" class="field"
+                                             th:classappend="${errors.hasError('treatedTypes')} ? 'error'">
+                                            <input type="radio" name="treated" th:value="${item.code}"
+                                                   th:text="${item.label}" th:field="*{treated}"
+                                                   th:checked="${form.treated}==${item.code}"/>
+                                        </div>
+                                        <p th:if="${errors.hasError('treated')}" th:text="${errors.getMessage('treated')}"
+                                           class="error-message">
+                                        </p>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>「はい」 を選んだ方は内容をご記入下さい（全角）</label>
+                                    </td>
+                                    <!--<td>
+                                        <div class="field"
+                                             th:classappend="|${errors.hasError('medicalHistory')?'error': ''} ${errors.hasError('valueMedicalHistory')?'error': ''}|">
+                                            <input type="text" name="medicalHistory" th:value="${form.medicalHistory}"/>
+                                            <p th:if="${errors.hasError('medicalHistory')}"
+                                               th:text="${errors.getMessage('medicalHistory')}" class="error-message">
+                                            </p>
+                                            <p th:if="${errors.hasError('valueMedicalHistory')}"
+                                               th:text="${errors.getMessage('valueMedicalHistory')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <label>お勤め先名（全角）</label>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：ＴＩＳＣＯＮ株式会社</p>
+                                        <div class="field " th:classappend="${errors.hasError('employerName')} ? 'error'">
+                                            <input type="text" name="employerName" th:value="${form.employerName}"/>
+                                            <p th:if="${errors.hasError('employerName')}"
+                                               th:text="${errors.getMessage('employerName')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>お勤め先郵便番号（半角）</label>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：123-4567</p>
+                                        <div class="field" th:classappend="${errors.hasError('employerZipCode')} ? 'error'">
+                                            <input type="text" name="employerZipCode" th:value="${form.employerZipCode}"/>
+                                            <p th:if="${errors.hasError('employerZipCode')}"
+                                               th:text="${errors.getMessage('employerZipCode')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td style="white-space: nowrap;">
+                                        <label>お勤め先住所（全角）</label>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：東京都新宿区西新宿８－１７－１</p>
+                                        <div class="field" th:classappend="${errors.hasError('employerAddress')} ? 'error'">
+                                            <input type="text" name="employerAddress" th:value="${form.employerAddress}"/>
+                                            <p th:if="${errors.hasError('employerAddress')}"
+                                               th:text="${errors.getMessage('employerAddress')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>お勤め先電話番号（半角）</label>
+                                    </td>
+                                    <!--<td>
+                                        <p>例：00-1111-2222</p>
+                                        <div class="field"
+                                             th:classappend="${errors.hasError('employerPhoneNumber')} ? 'error'">
+                                            <input type="text" name="employerPhoneNumber"
+                                                   th:value="${form.employerPhoneNumber}"/>
+                                            <p th:if="${errors.hasError('employerPhoneNumber')}"
+                                               th:text="${errors.getMessage('employerPhoneNumber')}" class="error-message">
+                                            </p>
+                                        </div>
+                                    </td>-->
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <label>業種</label>
+                                    </td>
+                                    <!--<td>
+                                        <div th:each="item : ${industryTypes}" class="field"
+                                             th:classappend="${errors.hasError('industryType')} ? 'error'">
+                                            <input type="radio" name="industryType" th:value="${item.code}"
+                                                   th:text="${item.label}" th:field="*{industryType}"
+                                                   th:checked="${form.industryType}==${item.code}"/>
+                                        </div>
+                                        <p th:if="${errors.hasError('industryType')}"
+                                           th:text="${errors.getMessage('industryType')}" class="error-message">
+                                        </p>
+                                    </td>-->
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p>ご登録内容に誤りがない場合は、「申し込み」ボタンを押してください。</p>
+
+
+                            <button class="ui teal button angle center icon">申し込み</button>
                         </div>
                     </div>
                 </form>
